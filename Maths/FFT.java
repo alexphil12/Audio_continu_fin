@@ -16,21 +16,21 @@ public class FFT {
             throw new IllegalArgumentException("n n'est pas une puissance de 2");
         }
 
-        // compute FFT of even terms
+        // Exécution de la fft sur les termes paires
         Complexe[] paire = new Complexe[n/2];
         for (int k = 0; k < n/2; k++) {
             paire[k] = x[2*k];
         }
         Complexe[] paireFFT = fft(paire);
 
-        // compute FFT of odd terms
+        // Exécution de la fft sur les termes impaires
         Complexe[] impaire  = new Complexe[n/2];
         for (int k = 0; k < n/2; k++) {
             impaire[k] = x[2*k + 1];
         }
         Complexe[] impaireFFT = fft(impaire);
 
-        // combine
+        // On combine les résultats
         Complexe[] y = new Complexe[n];
         for (int k = 0; k < n/2; k++) {
             double kth = -2 * k * Math.PI / n;
@@ -59,9 +59,11 @@ public class FFT {
         return(y);
     }
     public static void main(String args[]){
-        double [] x={0,1,0,1};
+        double [] x={1,1,1,1,0,0,1,1};
+                  x=Math.cos(x);
         Complexe[] x1=DoubletoComplexe(x);
         Complexe[]y=fft(x1);
-        System.out.print("Y(0)="+y[0]+"Y(1)="+y[1]+"Y(2)="+y[2]+"Y(3)="+y[3]);
+        System.out.print(" Y(0)= "+y[0]+" Y(1)= "+y[1]+" Y(2)= "+y[2]+" Y(3)= "+y[3]);
+
     }
 }
