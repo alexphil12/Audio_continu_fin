@@ -60,10 +60,10 @@ public class FFT {
     }
     public static void main(String args[]){
         double [] x={1,1,1,1,0,0,1,1};
-                  x=Math.cos(x);
         Complexe[] x1=DoubletoComplexe(x);
         Complexe[]y=fft(x1);
-        System.out.print(" Y(0)= "+y[0]+" Y(1)= "+y[1]+" Y(2)= "+y[2]+" Y(3)= "+y[3]);
+        x=modulefft(y);
+        System.out.print(" Y(0)= "+x[0]+" Y(1)= "+x[1]+" Y(2)= "+x[2]+" Y(3)= "+x[3]);
 
     }
 }
