@@ -26,18 +26,18 @@ public class Main_audio_test {
             response=response.toUpperCase();
             switch(response){
                 case("P"):clip.start();
-                break;
+                    break;
                 case("S"):clip.stop();
-                break;
+                    break;
                 case("R"):clip.setMicrosecondPosition(0);
-                break;
+                    break;
                 case("Q"):clip.close();
-                break;
+                    break;
                 default: System.out.println("Commande non valide");
             }
 
         }
-    System.out.println("Astal vuego !!!");
+        System.out.println("Astal vuego !!!");
 
 
 
