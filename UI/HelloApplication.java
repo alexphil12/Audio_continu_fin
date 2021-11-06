@@ -2,22 +2,50 @@ package UI;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.scene.Group;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
-        Group g=new Group();
-        Scene scene = new Scene(g,320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
-    }
+    public void start(Stage primaryStage) {
+         try {
+             BorderPane root = new BorderPane();
+             root.setTop(createToolbar());
+             root.setBottom(createStatusbar());
+             root.setCenter(createMainContent());
+             Scene scene = new Scene(root,1500,800);
+             primaryStage.setScene(scene);
+             primaryStage.setTitle("The JavaFX audio processor");
+             primaryStage.show();
+            } catch(Exception e) {e.printStackTrace();}
+        }
 
-    public static void main(String[] args) {
-        launch();
-    }
-}
+        private Node createToolbar(){
+        Button button = new Button("appuyez !");
+        ToolBar tb = new ToolBar(button, new Label("ceci est un label"), new Separator());
+        button.setOnAction(event -> System.out.println("appui!"));
+        ComboBox<String> cb = new ComboBox<>();
+        cb.getItems().addAll("Item 1", "Item 2", "Item 3");
+        tb.getItems().add(cb);
+        return tb;
+        }
+
+        private Node createStatusbar(){
+        HBox statusbar = new HBox();
+        statusbar.getChildren().addAll(new Label("Name:"), new TextField(" "));
+        return statusbar;
+        }
+
+        private Node createMainContent(){
+        Group g = new Group();
+        // ici en utilisant g.getChildren().add(...) vous pouvez ajouter tout ´el´ement graphique souhait´e de type Node
+        return g;
+        }
+ }
+
