@@ -11,7 +11,7 @@ public class FFT {
         // cas n=1
         if (n == 1) return new Complexe[] { x[0] };
 
-        // Algorithme FFT de Cooley Turkey
+        // Algorithme FFT de Cooley Turkey il faut donc un signal de longueur 2^n
         if (n % 2 != 0) {
             throw new IllegalArgumentException("n n'est pas une puissance de 2");
         }
@@ -54,10 +54,11 @@ public class FFT {
         int n=sig.length;
         double[] y=new double[n];
         for(int k=0;k<n;k++){
-            y[k]=sig[k].module();
+            y[k]=sig[k].module()/n;//normalisation pour simplifier l'affichage.
         }
         return(y);
     }
+
     public static void main(String args[]){
         double [] x={1,1,1,1,0,0,1,1};
         Complexe[] x1=DoubletoComplexe(x);
@@ -66,4 +67,5 @@ public class FFT {
         System.out.print(" Y(0)= "+x[0]+" Y(1)= "+x[1]+" Y(2)= "+x[2]+" Y(3)= "+x[3]);
 
     }
+
 }
