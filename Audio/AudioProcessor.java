@@ -1,8 +1,14 @@
 package Audio;
+import UI.SignalView;
+import javafx.animation.AnimationTimer;
+import javafx.scene.chart.XYChart;
+
 import javax.sound.sampled.*;
 
+import static Maths.FFT.*;
+
 public class AudioProcessor implements Runnable {
-    private AudioSignal inputSignal, outputSignal;
+    private static AudioSignal inputSignal, outputSignal;
     private TargetDataLine audioInput;
     private SourceDataLine audioOutput;
     private boolean isThreadRunning; // makes it possible to "terminate" thread
@@ -69,9 +75,29 @@ public class AudioProcessor implements Runnable {
          public boolean getisThreadRunning(){
              return(isThreadRunning);
          }
+         public static void Lance_fft( SignalView view, boolean update) {
+         new AnimationTimer() {
+             @Override
+             public void handle(long l) {
+                 XYChart.Series serie=new XYChart.Series();
+                 if(update==true){
+                     for(int k=0;k<inputSignal.getSampleBuffer().length;k++){
+                         double[] sig1=modulefft(fft(DoubletoComplexe(inputSignal.getSampleBuffer())));
+                         serie.getData().add(new XYChart.Data(k,sig1[k]));
+                     }
+                     view.getData().add(serie);
+                 }
+             }
+         };
+    }
+
+
+
+
+
          /* an example of a possible test code */
          public static void main(String[] args) throws LineUnavailableException {
-         FrameSize framesize=new FrameSize(8000,512);
+         FrameSize framesize=new FrameSize(8000,256);
          framesize.set_sample();
          TargetDataLine inLine = AudioIO.obtainAudioInput("Default Audio Device", 8000);
          SourceDataLine outLine = AudioIO.obtainAudioOutput("Default Audio Device", 8000);

@@ -1,6 +1,13 @@
 package Audio;
+import Maths.FFT.*;
+import UI.SignalView;
+import javafx.animation.AnimationTimer;
+import javafx.scene.chart.XYChart;
+
 import javax.sound.sampled.*;
 import java.util.Arrays;
+
+import static Maths.FFT.*;
 
 public class AudioIO {
     /** A collection of static utilities related to the audio system. */
@@ -49,9 +56,32 @@ public class AudioIO {
             return(sourline);
         }
         }
+        public static void start_Audio_Processing(String inputMixer, String outputMixer,int freq_ech,int temps_frame_ms) throws LineUnavailableException {
+            FrameSize framesize=new FrameSize(freq_ech,temps_frame_ms);
+            framesize.set_sample();
+            TargetDataLine targetline=obtainAudioInput(inputMixer,framesize.getFreq_ech());
+            SourceDataLine sourceline=obtainAudioOutput(outputMixer,framesize.getFreq_ech());
+
+            AudioProcessor AP=new AudioProcessor(targetline,sourceline,framesize);
+            targetline.open();targetline.start();sourceline.open();sourceline.start();
+
+            Thread Process=new Thread(AP);Process.start();
+        }
+        public static void  stop_Audio_Processing(){
 
 
-        public static void main(String[] args){
-            printAudioMixers();
+        }
+    public static void Update_data_sig(Boolean update,double[] sig,SignalView view) {
+        new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+                XYChart.Series serie=new XYChart.Series();
+                if(update==true){
+                    for(int k=0;k<sig.length;k++){
+                        serie.getData().add(new XYChart.Data(k,sig[k]));
+                    }
+                    view.getData().add(serie);
+                }
             }
-}
+        };
+}}

@@ -7,7 +7,7 @@ package Audio;
 
         private int nombre_de_sample;
 
-        public void set_sample(){  //Il faut toujours appelé set_sample après avoir construit une framesize.
+        public void set_sample(){  //Il faut toujours appeler set_sample après avoir construit une framesize.
             this.nombre_de_sample=this.freq_ech*this.temps_frame_ms/1000;}// le temps est ici en
         public void setFreq_ech(int i) {                                    //en ms.
             this.nombre_de_sample=i;
