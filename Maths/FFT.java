@@ -54,17 +54,21 @@ public class FFT {
         int n=sig.length;
         double[] y=new double[n];
         for(int k=0;k<n;k++){
-            y[k]=sig[k].module()/n;//normalisation pour simplifier l'affichage.
+            y[k]=sig[k].module();//normalisation pour simplifier l'affichage.
         }
         return(y);
     }
 
     public static void main(String args[]){
-        double [] x={1,1,1,1,0,0,1,1};
-        Complexe[] x1=DoubletoComplexe(x);
-        Complexe[]y=fft(x1);
-        x=modulefft(y);
-        System.out.print(" Y(0)= "+x[0]+" Y(1)= "+x[1]+" Y(2)= "+x[2]+" Y(3)= "+x[3]);
+        int l=(int)Math.pow(2,10);
+        double [] x=new double[l];
+        for(int j=0;j<x.length;j++){
+            x[j]=Math.sin(2*Math.PI*(50.0/1024.0)*j);
+        }
+        double[] x1=modulefft(fft(DoubletoComplexe(x)));
+        for(int k=0;k<x.length;k++){
+            System.out.println("Y"+ k +"="+x1[k]);
+        }
 
     }
 
