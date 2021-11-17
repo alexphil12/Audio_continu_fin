@@ -66,29 +66,6 @@ public class AudioSignal {
     public int getFrameSize(){
         return(sampleBuffer.length);
     }
-    public static void main(String[] args) throws LineUnavailableException, InterruptedException {
-        FrameSize frame_size=new FrameSize(8000,5000);
-        frame_size.set_sample();
-        AudioFormat format=new AudioFormat(8000,16,1,true,true);
-        TargetDataLine target= AudioSystem.getTargetDataLine(format);
-        SourceDataLine sortie=AudioSystem.getSourceDataLine(format);
-        AudioSignal sig=new AudioSignal(frame_size);
-        target.open();
-        sortie.open();
-        Thread reco_thread=new Thread(){
-            @Override
-            public void run(){
-                target.start();
-                sortie.start();
-                while (true){
-                    sig.recordFrom(target);
-                    sig.playTo(sortie);
-                }
-                }
 
-
-
-        };
-    }
 
 }

@@ -10,6 +10,8 @@ import java.util.Arrays;
 import static Maths.FFT.*;
 
 public class AudioIO {
+    public static Thread star;
+    public static AudioProcessor AP;
     /** A collection of static utilities related to the audio system. */
 
          /** Displays every audio mixer available on the current system. */
@@ -62,26 +64,40 @@ public class AudioIO {
             TargetDataLine targetline=obtainAudioInput(inputMixer,framesize.getFreq_ech());
             SourceDataLine sourceline=obtainAudioOutput(outputMixer,framesize.getFreq_ech());
 
-            AudioProcessor AP=new AudioProcessor(targetline,sourceline,framesize);
+            AP=new AudioProcessor(targetline,sourceline,framesize);
+            AP.setIsthreadrunning(true);
             targetline.open();targetline.start();sourceline.open();sourceline.start();
 
-            Thread Process=new Thread(AP);Process.start();
+            star=new Thread(AP);star.start();
         }
         public static void  stop_Audio_Processing(){
-
+            AP.setIsthreadrunning(false);
 
         }
-    public static void Update_data_sig(Boolean update,double[] sig,SignalView view) {
-        new AnimationTimer() {
-            @Override
-            public void handle(long l) {
-                XYChart.Series serie=new XYChart.Series();
-                if(update==true){
-                    for(int k=0;k<sig.length;k++){
-                        serie.getData().add(new XYChart.Data(k,sig[k]));
-                    }
-                    view.getData().add(serie);
+    public static void Update_data_sig(Boolean update,SignalView view) {
+            XYChart.Series serie=new XYChart.Series();
+            if(update==true){
+                for(int k=0;k<AP.getOutputSignal().getSampleBuffer().length;k++){
+                    serie.getData().add(new XYChart.Data(k,AP.getOutputSignal().getSample(k)));
                 }
+                view.getData().add(serie);
             }
         };
-}}
+
+
+    public static void Update_data_fft(Boolean update,SignalView view) {
+        XYChart.Series serie = new XYChart.Series();
+        double[] sig=modulefft(fft(DoubletoComplexe(AP.getOutputSignal().getSampleBuffer())));
+        if (update == true) {
+            for(int k=0;k<AP.getOutputSignal().getSampleBuffer().length;k++){
+                serie.getData().add(new XYChart.Data(k,sig[k]));
+            }
+        }
+        view.getData().add(serie);
+    }
+}
+
+
+
+
+

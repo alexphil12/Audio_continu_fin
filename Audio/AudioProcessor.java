@@ -8,7 +8,7 @@ import javax.sound.sampled.*;
 import static Maths.FFT.*;
 
 public class AudioProcessor implements Runnable {
-    private static AudioSignal inputSignal, outputSignal;
+    public static AudioSignal inputSignal, outputSignal;
     private TargetDataLine audioInput;
     private SourceDataLine audioOutput;
     private boolean isThreadRunning; // makes it possible to "terminate" thread
