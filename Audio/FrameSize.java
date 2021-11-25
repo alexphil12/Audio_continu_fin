@@ -10,10 +10,10 @@ package Audio;
         public void set_sample(){  //Il faut toujours appeler set_sample après avoir construit une framesize.
             this.nombre_de_sample=this.freq_ech*this.temps_frame_ms/1000;}// le temps est ici en
         public void setFreq_ech(int i) {                                    //en ms.
-            this.nombre_de_sample=i;
+            this.freq_ech=i;
         }
         public int getFreq_ech(){
-            return(this.nombre_de_sample);
+            return(this.freq_ech);
         }
         public void setTemps_frame_ms(int i){
             this.temps_frame_ms=i;
