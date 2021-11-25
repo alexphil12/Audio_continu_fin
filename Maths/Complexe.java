@@ -37,7 +37,11 @@ public class Complexe {
     }
     public Complexe minus(Complexe Z){return((new Complexe(this.re-Z.re,this.im-Z.im)));}
     public Complexe Multi(Complexe Z){
-        return(new Complexe(this.re*Z.re-this.im*Z.im,this.re*Z.im+this.im*Z.re));
+        return(new Complexe(this.re*Z.getRe()-this.im*Z.getIm(),this.re*Z.getIm()+this.im*Z.getIm()));
+    }
+    public static Complexe multi_stat(Complexe Z1,Complexe Z2){
+        return(new Complexe(Z1.getRe()*Z2.getRe()-Z1.getIm()*Z2.getIm(),Z1.getIm()*Z2.getRe()+Z1.getRe()*Z2.getIm()));
+
     }
     public Complexe expo_complexe_multipli(double R,double theta){
         Complexe h=new Complexe(R*Math.cos(theta),R*Math.sin(theta));
@@ -47,7 +51,12 @@ public class Complexe {
     public double module() {
         return(Math.sqrt(re*re+im*im));
     }
-
+    public Complexe conjugate(){
+        return (new Complexe(re,-im));
+    }
+    public Complexe scale(double alpha){
+        return(new Complexe(alpha*re,alpha*im));
+    }
     public double argument(){
         return Math.atan2(im, re);
     }
@@ -58,9 +67,11 @@ public class Complexe {
             return re + " + " + im + "i";
         }
     public static void main(String args[]){
-        Complexe h=new Complexe(-1,0);
+        Complexe h=new Complexe(-1,1);
         double k=h.argument();
+        h=h.conjugate();
         System.out.println(k);
+        System.out.println(h);
 
     }
 

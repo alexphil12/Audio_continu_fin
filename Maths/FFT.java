@@ -40,6 +40,31 @@ public class FFT {
         }
         return y;
     }
+    public static Complexe[] ifft(Complexe[] x) {
+        int n = x.length;
+        Complexe[] y = new Complexe[n];
+
+        // conjugaison complexe
+        for (int i = 0; i < n; i++) {
+            y[i] = x[i].conjugate();
+        }
+
+        // on applique la fft
+        y = fft(y);
+
+        // on reconjugue
+        for (int i = 0; i < n; i++) {
+            y[i] = y[i].conjugate();
+        }
+
+        // division par n
+        for (int i = 0; i < n; i++) {
+            y[i] = y[i].scale(1.0 / n);
+        }
+
+        return y;
+
+    }
     public static Complexe[] DoubletoComplexe(double [] input_reel){
         int n=input_reel.length;
         Complexe[] y=new Complexe[n];
@@ -54,7 +79,7 @@ public class FFT {
         int n=sig.length;
         double[] y=new double[n];
         for(int k=0;k<n;k++){
-            y[k]=sig[k].module();//normalisation pour simplifier l'affichage.
+            y[k]=sig[k].module();
         }
         return(y);
     }
@@ -62,12 +87,14 @@ public class FFT {
     public static void main(String args[]){
         int l=(int)Math.pow(2,10);
         double [] x=new double[l];
+        double[] equal=new double[l];
         for(int j=0;j<x.length;j++){
             x[j]=Math.sin(2*Math.PI*(50.0/1024.0)*j);
         }
-        double[] x1=modulefft(fft(DoubletoComplexe(x)));
+        Complexe[] x1=ifft(fft(DoubletoComplexe(x)));
         for(int k=0;k<x.length;k++){
-            System.out.println("Y"+ k +"="+x1[k]);
+            equal[k]=x[k]-x1[k].getRe();
+            System.out.println("on a equal["+k+"]="+equal[k]);
         }
 
     }
