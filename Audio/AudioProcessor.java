@@ -38,11 +38,11 @@ public class AudioProcessor implements Runnable {
              if(fonctio=="Sortie par défaut"){
              outputSignal.setFrom(inputSignal);}
              if(fonctio=="Filtre_passe_bas"){
-                 filtre_passe_bas(inputSignal,1500,(double)inputSignal.getFrameSize().getFreq_ech(), outputSignal);}
+                 filtre_passe_bas(inputSignal,1000,(double)inputSignal.getFrameSize().getFreq_ech(), outputSignal);}
              if(fonctio=="Filtre_passe_haut"){
                  filtre_passe_haut(inputSignal,2000,(double)inputSignal.getFrameSize().getFreq_ech(),outputSignal);}
              if(fonctio=="écho"){
-                 echo_num(inputSignal,outputSignal,1000,0.5);
+                 echo_num(inputSignal,outputSignal,500,0.5);
              }
              // your job: copy inputSignal to outputSignal with some audio effect
 
