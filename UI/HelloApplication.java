@@ -95,7 +95,7 @@ public class HelloApplication extends Application {
         Button b1=new Button("Pause, start fft");
         NumberAxis xAxisfreq = new NumberAxis(0,4000, 1000);
         xAxisfreq.setLabel("Fréquence en hertz");
-        NumberAxis yAxisfreq = new NumberAxis(0, 20, 10);
+        NumberAxis yAxisfreq = new NumberAxis(-50, 0, 10);
         yAxisfreq.setLabel("Amplitude du Spectre en dB");
         SignalView sigfreq = new SignalView(xAxisfreq, yAxisfreq);
         sigfreq.setPrefWidth(500);
