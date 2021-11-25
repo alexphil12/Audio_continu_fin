@@ -52,7 +52,7 @@ public class HelloApplication extends Application {
         ComboBox<Number> cbfreq = new ComboBox<>();
         ComboBox<Number> cbtemps = new ComboBox<>();
         cbfreq.getItems().addAll(2000, 4000, 8000, 16000);//les valeurs sont telles que freq_ech*temps_frame/1000=2^n pour que le calcul de la fft soit toujours possible.
-        cbtemps.getItems().addAll(256, 512, 1024, 2048);
+        cbtemps.getItems().addAll(128,256, 512, 1024, 2048);
         cbout.getItems().addAll("Default Audio Device", "Port Speakers (Realtek(R) Audio)", "Périphérique audio principal", "Speakers (Realtek(R) Audio)");
         cbin.getItems().addAll("Default Audio Device", "Microphone Array (Realtek(R) Audio)", "Pilote de capture audio principal", "Port Microphone Array (Realtek(R) Au");
         cb.getItems().addAll("Sortie par défaut","Filtre_passe_bas","Filtre_passe_haut","écho");
@@ -93,9 +93,9 @@ public class HelloApplication extends Application {
         rootPane.setTop(pane4);
         Button b=new Button("Initialisation affichage");
         Button b1=new Button("Pause, start fft");
-        NumberAxis xAxisfreq = new NumberAxis(0,4000, 1000);
+        NumberAxis xAxisfreq = new NumberAxis(0,8000, 1000);
         xAxisfreq.setLabel("Fréquence en hertz");
-        NumberAxis yAxisfreq = new NumberAxis(-50, 0, 10);
+        NumberAxis yAxisfreq = new NumberAxis(-100, 0, 10);
         yAxisfreq.setLabel("Amplitude du Spectre en dB");
         SignalView sigfreq = new SignalView(xAxisfreq, yAxisfreq);
         sigfreq.setPrefWidth(500);
