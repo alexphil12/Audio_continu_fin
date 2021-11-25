@@ -30,7 +30,7 @@ public class SignalView extends LineChart {
                 serie.getData().add(new XYChart.Data(k,AP.getOutputSignal().getSample(k)));
             }
             view.getData().add(serie);
-            if(compte==4){
+            if(compte==4){//On représente jusqu'a 4 signaux sur le Signalview puis on les effaces
                 view.getData().clear();
             }
         }
@@ -41,7 +41,7 @@ public class SignalView extends LineChart {
         if (update == true) {
             for(int k=0;k<AP.getOutputSignal().getSampleBuffer().length/2;k++){
                 double j=k*((double)AP.getOutputSignal().getFrameSize().getFreq_ech()/((double)AP.getOutputSignal().getSampleBuffer().length));
-                serie.getData().add(new XYChart.Data(j,sig[k]));
+                serie.getData().add(new XYChart.Data(j,sig[k]));// les pics fréquentielles sont mis à la place qu'ils ont sur le spectre(l'axe étant gradué en hz)
             }
             view.getData().add(serie);
             if(compte==4){

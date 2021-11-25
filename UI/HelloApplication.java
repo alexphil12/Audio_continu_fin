@@ -44,7 +44,6 @@ public class HelloApplication extends Application {
 
     private Node createToolbar() {
         Button button = new Button("Lance le processor");
-        Button button1 = new Button("lance la fft");
         Button button2 = new Button("Arrête le processor");
         ToolBar tb = new ToolBar(button, new Label("Sélection de l'input"), new Separator());
         ComboBox<String> cb=new ComboBox();
@@ -57,7 +56,7 @@ public class HelloApplication extends Application {
         cbout.getItems().addAll("Default Audio Device", "Port Speakers (Realtek(R) Audio)", "Périphérique audio principal", "Speakers (Realtek(R) Audio)");
         cbin.getItems().addAll("Default Audio Device", "Microphone Array (Realtek(R) Audio)", "Pilote de capture audio principal", "Port Microphone Array (Realtek(R) Au");
         cb.getItems().addAll("Sortie par défaut","Filtre_passe_bas","Filtre_passe_haut","écho");
-        tb.getItems().addAll(cbin, button1, new Label("Sélection de l'output"), cbout, button2, new Label("Sélection de la fréquence(hz)"), cbfreq, new Label("Sélection du temps de frame (ms)"), cbtemps,cb);
+        tb.getItems().addAll(cbin,new Label("Sélection de l'output"), cbout, button2, new Label("Fréq_éch(hz)"), cbfreq, new Label("Temps frame(ms)"), cbtemps,new Label("mode"),cb);
         button.setOnAction(event -> {
             try {
                 AudioIO.start_Audio_Processing(cbin.getValue(), cbout.getValue(), (int) cbfreq.getValue(), (int) cbtemps.getValue(),cb.getValue());
