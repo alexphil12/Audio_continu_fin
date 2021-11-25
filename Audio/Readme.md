@@ -1,4 +1,4 @@
-  La partie audio comporte l'AudioProcessor, l'AudioIO et l'AudioSignal et le Framesize.
+  Le package audio comporte l'AudioProcessor, l'AudioIO et l'AudioSignal et le Framesize.
   Le Framesize est simplement une classe contenant la fréquence d'échantillonage ainsi que le temps de frame, 
 elle calcul alors le nombre de sample dans chaque frame et sert à la réalisation de la classe audio_processor et audio Signal.
   AudioIO contient des fonctions static utiles pour le traitement(celles permettant notemment d'obtenir la target ainsi que la source dataline pour le traitement ainsi que
