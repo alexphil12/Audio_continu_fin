@@ -105,7 +105,7 @@ public class HelloApplication extends Application {
         sigfreq.setHorizontalGridLinesVisible(false);
 
         Button b1temp=new Button("Pause, lance temp");
-        NumberAxis xAxis = new NumberAxis(0, 4096 ,1000);
+        NumberAxis xAxis = new NumberAxis(0, 2*4096 ,1000);
         xAxis.setLabel("échantillon");
         NumberAxis yAxis = new NumberAxis(-1, 1, 0.5);
         yAxis.setLabel("intensité ");
